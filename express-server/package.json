@@ -1,0 +1,26 @@
+{
+  "name": "express-server",
+  "version": "1.0.0",
+  "description": "A simple template for containerized express-node-mongodb server",
+  "main": "index-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index-server.js",
+    "dev": "nodemon index-server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "mongoose",
+    "docker"
+  ],
+  "author": "Anzar Ahmad Malik",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
