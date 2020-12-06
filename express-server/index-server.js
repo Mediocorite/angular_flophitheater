@@ -1,15 +1,23 @@
-// Importing the Packages
+// Importing the Packages and Database
 const express = require('express');
-
-// Constants
+const database = require('./config/mongoose-connect');
+const itemStack = require('./models/itemstack');
+// Constants 
 const PORT = 5000;
-const HOST = '0.0.0.0';
-
-// Initializing the Server
+// Server Initialization and Routing
 const app = express();
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  itemStack.find()
+    .then(items => res.render('index', { items }))
+    .catch(err => res.status(404).json({ msg: 'No items found' }));
+});
+app.post('/item/add', (req, res) => {
+  const newItem = new itemStack({
+    name: req.body.name
+  });
+  newItem.save().then(item => res.redirect('/'));
 });
 // Starting the server
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+app.listen(PORT, () => console.log(`Server running on PORT:${PORT}`));
